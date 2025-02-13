@@ -1,2 +1,2 @@
-# Speaker_Extractor_DPRNN
-Speaker Extractor with DPRNN
+# TSExcalibur
+A toolkit for target speaker extraction (TSE)
