@@ -1,0 +1,1 @@
+python eval.py --test_dir data/wav8k/min/test --task sep_clean --model_path exp/tmp/best_model.pth --out_dir exp/tmp/out_best --exp_dir exp/tmp --use_gpu=1
