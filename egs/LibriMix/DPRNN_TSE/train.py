@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import json
 import sys
@@ -8,19 +9,13 @@ from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 
-# from recipes.librimix.DPRNN.src.model import DPRNNTasNetSpe
-# from recipes.librimix.DPRNN.src.datasets import make_dataloader
 
-
-sys.path.append('/home/youzhenghai/project/asteroid/recipes/librimix/DPRNN/source')
-
-from source.model.dprnn_spe import DPRNNSpeTasNet
-from source.datasets.librisets import LibriMixInformed
-
+sys.path.append('./../../../')
+from calibur.model.dprnn_spe import DPRNNSpeTasNet
+from calibur.datasets.datasets_dc import LibriMixInformed_dc
+from calibur.model.system import SystemInformed
 from asteroid.engine.optimizers import make_optimizer
-from source.model.system import SystemInformed
 from asteroid.losses import singlesrc_neg_sisdr
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--exp_dir", default="exp/tmp", help="Full path to save best validation model")
@@ -35,8 +30,10 @@ def joint_loss(est_targets, targets, spk_pre, spk_id):
 
 def main(conf):
 
-    train_set = LibriMixInformed(
+    train_set = LibriMixInformed_dc(
         csv_dir=conf["data"]["train_dir"],
+        utt_scp_file=conf["data"]["tr_utt_scp_file"],
+        noise_scp_file=conf["data"]["noise_tr_scp_file"],
         task=conf["data"]["task"],
         sample_rate=conf["data"]["sample_rate"],
         n_src=conf["data"]["n_src"],
@@ -45,8 +42,10 @@ def main(conf):
         spk_list=conf["data"]["spk_list"],
     )
 
-    val_set = LibriMixInformed(
+    val_set = LibriMixInformed_dc(
         csv_dir=conf["data"]["valid_dir"],
+        utt_scp_file=conf["data"]["cv_utt_scp_file"],
+        noise_scp_file=conf["data"]["noise_cv_scp_file"],
         task=conf["data"]["task"],
         sample_rate=conf["data"]["sample_rate"],
         n_src=conf["data"]["n_src"],
@@ -126,6 +125,7 @@ def main(conf):
     )
     if conf["training"]["last_checkpoint_path"] is not None:
         print(conf["training"]["last_checkpoint_path"])
+
         trainer.fit(system,ckpt_path=conf["training"]["last_checkpoint_path"])
     else:
         print('trainer from scratch')

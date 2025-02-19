@@ -8,6 +8,7 @@
 # https://github.com/asteroid-team/asteroid/blob/master/LICENSE
 
 import os
+import sys
 import random
 import soundfile as sf
 import torch
@@ -19,12 +20,13 @@ from tqdm import tqdm
 from pprint import pprint
 from pathlib import Path
 
+
+sys.path.append('./../../../')
+from calibur.model.dprnn_spe import DPRNNSpeTasNet
+from calibur.datasets.librisets import LibriMixInformed
 from asteroid.metrics import get_metrics
 from asteroid.utils import tensors_to_device
 from asteroid.dsp.normalization import normalize_estimates
-
-from source.model.dprnn_spe import DPRNNSpeTasNet
-from source.datasets.librisets import LibriMixInformed
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -63,8 +65,8 @@ parser.add_argument(
 )
 parser.add_argument("--exp_dir", default="exp/tmp", help="Experiment root")
 
-# COMPUTE_METRICS = ["si_sdr", "sdr", "sir", "sar", "stoi"]
-COMPUTE_METRICS = ["si_sdr", "stoi"]
+COMPUTE_METRICS = ["si_sdr", "sdr", "sir", "sar", "stoi"]
+
 
 
 def main(conf):
@@ -91,7 +93,7 @@ def main(conf):
         task=conf["train_conf"]["data"]["task"],
         sample_rate=conf["train_conf"]["data"]["sample_rate"],
         n_src=conf["train_conf"]["data"]["n_src"],
-        spk_list=conf["train_conf"]["data"]["spk_list"],
+        spk_list=conf["train_conf"]["data"]["test_spk_list"],
         segment=None,
         segment_aux=None,
     )  # Uses all segment length
