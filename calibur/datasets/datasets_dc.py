@@ -18,22 +18,22 @@ import torch as th
 import warnings
 import pdb
 
-def read_enrollment_csv(csv_path):
-    data = defaultdict(dict)
-    with open(csv_path, 'r') as f:
-        f.readline() # csv header
+# def read_enrollment_csv(csv_path):
+#     data = defaultdict(dict)
+#     with open(csv_path, 'r') as f:
+#         f.readline() # csv header
 
-        for line in f:
-            mix_id, utt_id, *aux = line.strip().split(',')
-            aux_it = iter(aux)
-            aux = [(auxpath,int(float(length))) for auxpath, length in zip(aux_it, aux_it)]
-            data[mix_id][utt_id] = aux
-    return data
+#         for line in f:
+#             mix_id, utt_id, *aux = line.strip().split(',')
+#             aux_it = iter(aux)
+#             aux = [(auxpath,int(float(length))) for auxpath, length in zip(aux_it, aux_it)]
+#             data[mix_id][utt_id] = aux
+#     return data
 
 class LibriMixInformed_dc(Dataset):
     def __init__(
-        self, csv_dir, utt_scp_file,noise_scp_file, spk_list, task="sep_clean", sample_rate=16000, n_src=2,
-        segment=3, segment_aux=3, 
+        self, csv_dir, utt_scp_file,noise_scp_file, spk_list, task="sep_clean", sample_rate=16000, n_src=2, 
+        MAX_AMP=0.9, MIN_LOUDNESS=-33, MAX_LOUDNESS=-25, mean_snr=-2, var_snr=15,segment=3, segment_aux=3, 
         ):
         self.base_dataset = LibriMix(csv_dir, task, sample_rate, n_src, segment)
         self.seg_len = self.base_dataset.seg_len
