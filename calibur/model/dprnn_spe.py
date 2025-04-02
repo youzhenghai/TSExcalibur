@@ -315,10 +315,6 @@ class DPRNNSpe(DPRNN):
         self.fusion_type = fusion_type
 
 
-
-
-
-
         # fusion
         if fusion_type == 'cat':
             start_conv1d = nn.Conv1d(input_size + embeddings_size, feature_size, 1)
@@ -583,6 +579,10 @@ class DPRNNSpeTasNet(BaseEncoderMaskerDecoderInformed):
         sample_rate=8000,
         use_mulcat=False,
         num_spks=251,
+        embeddings_size=128,
+        fusion_type='cat',
+        O=256,
+        P=512,
         **fb_kwargs,
     ):
         encoder, decoder = make_enc_dec(
@@ -615,10 +615,10 @@ class DPRNNSpeTasNet(BaseEncoderMaskerDecoderInformed):
             rnn_type=rnn_type,
             dropout=dropout,
             num_spks= num_spks,
-            O=128,
-            P=256,
-            embeddings_size=128,
-            fusion_type='cat',
+            O=O,
+            P=P,
+            embeddings_size=embeddings_size,
+            fusion_type=fusion_type,
             kernel_size=kernel_size,
         )
 

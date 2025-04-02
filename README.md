@@ -4,6 +4,7 @@ A toolkit for target speaker extraction (TSE)
 Continuously Buliding...
 
 Model
+- [ ] **SpeakerBeam**
 - [ ] **SPEX+**
 - [ ] **SPEX++**
 - [x] **DPRNN-TSE**
