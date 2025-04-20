@@ -25,7 +25,7 @@ training:
   reduce_patience: 5
   batch_size: 3
   num_workers: 4
-  last_checkpoint_path: /work/youzhenghai/project/asteroid/recipes/LibriMix_Both/DPRNN_DC_SPK/exp/tmp/checkpoints/epoch=69-step=216230.ckpt
+  last_checkpoint_path: null
 # Optim config
 optim:
   optimizer: adam
