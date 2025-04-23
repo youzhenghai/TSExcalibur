@@ -15,9 +15,6 @@ fi
 
 $python_path local/create_local_metadata.py --librimix_dir $storage_dir/Libri$changed_n_src"Mix"
 
-
-$python_path local/csv2scp.py 
-
 $python_path local/get_text.py \
   --libridir $storage_dir/LibriSpeech \
   --split test-clean \
