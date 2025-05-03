@@ -65,7 +65,6 @@ class SpEx_Plus(BaseEncoderMaskerDecoderInformed):
             creation.
     """
 
-    # 1. 对齐参数
     def __init__(
         self,
         out_chan=None,
