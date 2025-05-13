@@ -17,3 +17,7 @@ Dataset
 - [ ] **WHAM!**
 - [ ] **WHAMR!**
 
+
+Pretrain Model
+
+https://huggingface.co/swc2/TSExcalibur
