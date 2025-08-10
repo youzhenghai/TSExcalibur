@@ -5,8 +5,8 @@ Continuously Buliding...
 
 Model
 - [ ] **SpeakerBeam**
-- [ ] **SPEX+**
-- [ ] **SPEX++**
+- [x] **SPEX+**
+- [x] **SPEX++**
 - [x] **DPRNN-TSE**
 - [ ] **DPRNN-IRA**
 - [ ] **X-Sepformer**
