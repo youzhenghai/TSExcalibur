@@ -1,7 +1,3 @@
-# Copyright (c) 2021 Brno University of Technology
-# Copyright (c) 2021 Nippon Telegraph and Telephone corporation (NTT).
-# All rights reserved
-# By Katerina Zmolikova, August 2021.
 
 from pathlib import Path
 from collections import defaultdict
