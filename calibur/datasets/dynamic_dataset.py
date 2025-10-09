@@ -214,10 +214,8 @@ class LibriMixInformed_dc(Dataset):
 
 
         with warnings.catch_warnings(record=True) as w:
-            warnings.simplefilter("always")  # 捕获所有警告
+            warnings.simplefilter("always") 
             signal = pyloudnorm.normalize.loudness(signal, c_loudness, target_loudness)
-
-            # 检查警告并处理
             if w:
                 for warning in w:
                     pass    
