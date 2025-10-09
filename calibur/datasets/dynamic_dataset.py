@@ -70,6 +70,30 @@ class LibriMixInformed_dc(Dataset):
             stop = None
         return start, stop
 
+
+    # def get_no_silent_wav(self, data):
+    #     element = random.choice(data)
+    #     wav_id = element[0]
+    #     path = element[1]
+    #     length = element[2]
+    #     wav = self._load_wav(path, length)
+        
+    #     c_loudness = self.meter.integrated_loudness(wav)
+    #     if c_loudness == float('-inf'):
+    #         return self.get_no_silent_wav(data)
+    #     # wav = self.normalize(wav)
+    #     return wav_id, wav
+
+    # def _reverberate(self, audio):
+
+    #     rirs_file = random.choice(self.rirs_files)
+    #     rirs,_ = sf.read(rirs_file, dtype="float32")
+    #     rirs = rirs / np.sqrt(np.sum(rirs**2))
+    #     if rirs.ndim == audio.ndim:
+    #         audio = signal.convolve(audio, rirs, mode='full')[:audio.shape[0]]
+
+    #     return audio
+
     def _snr_norm(self, signal, noise, is_noise=True):
         if is_noise:
             desired_snr = np.random.normal(self.mean_snr, self.var_snr**0.5)  
